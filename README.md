@@ -3,7 +3,7 @@
 
 ## Camel Mail
 **Used route** `CamelMailRoute`.
-For mocking a smtp server was used [FakeSMTP](http://nilhcem.com/FakeSMTP/download.html).
+For mocking a smtp server was used [Fake SMTP Server](https://github.com/gessnerfl/fake-smtp-server).
 
 Actual implementation is using timer for starting the mail route **every 5 seconds**.
 
