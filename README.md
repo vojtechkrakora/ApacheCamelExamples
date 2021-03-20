@@ -5,8 +5,6 @@
 **Used route** `CamelMailRoute`.
 For mocking a smtp server was used [Fake SMTP Server](https://github.com/gessnerfl/fake-smtp-server).
 
-Actual implementation is using timer for starting the mail route **every 5 seconds**.
-
 ### Invoke
 To send an Email to `smtp://localhost:5025` is used REST Get method on address
 `http://localhost:8080/camel-mail/send`
