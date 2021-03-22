@@ -11,7 +11,8 @@ To send an Email to `smtp://localhost:5025` is used REST Get method on address
 
 ### Description
 After start is created a route `CamelMailRoute`. This route uses custom processor 
-`SimpleMailProcessor`. The processor sets body a and headers like email subject etc.
+`SimpleMailProcessor`. The processor sets body a and headers like email subject etc. and
+adds an attachment (small png image from resources `attachment/ok_small.png`).
 
 To send an email is used REST api with GET method (returns nothing only SC = 200). 
 This method is (for now) without some service layer calling `ProducerTemplate` to
