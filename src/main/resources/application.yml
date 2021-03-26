@@ -1,0 +1,7 @@
+mail:
+  templates:
+    simpleTemplate:
+      name: simpleTemplate
+      path: mail/templates/simpleTemplate.html
+      content-type: text/html
+      attachment: true

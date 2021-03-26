@@ -7,7 +7,7 @@ For mocking a smtp server was used [Fake SMTP Server](https://github.com/gessner
 
 ### Invoke
 To send an Email to `smtp://localhost:5025` is used REST Get method on address
-`http://localhost:8080/camel-mail/send`
+`http://localhost:8080/camel-mail/send/SIMPLE`
 
 ### Description
 After start is created a route `CamelMailRoute`. This route uses custom processor 
