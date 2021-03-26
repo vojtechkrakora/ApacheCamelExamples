@@ -1,6 +1,5 @@
-package cz.vojtechkrakora.camel.mail.util;
+package cz.vojtechkrakora.camel.util;
 
-import cz.vojtechkrakora.camel.mail.enums.Templates;
 import lombok.experimental.UtilityClass;
 import org.springframework.core.io.ClassPathResource;
 
@@ -9,8 +8,8 @@ import java.nio.file.Files;
 
 @UtilityClass
 public class TemplateProviderUtil {
-    public static String getTemplateContent(Templates template) throws IOException {
-        ClassPathResource simpleTemplate = new ClassPathResource(template.getPath());
+    public static String getTemplateContent(String path) throws IOException {
+        ClassPathResource simpleTemplate = new ClassPathResource(path);
         return Files.readString(simpleTemplate.getFile().toPath());
     }
 }
