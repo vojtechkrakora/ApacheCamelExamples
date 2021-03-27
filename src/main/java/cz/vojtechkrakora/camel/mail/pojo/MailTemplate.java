@@ -1,5 +1,6 @@
 package cz.vojtechkrakora.camel.mail.pojo;
 
+import cz.vojtechkrakora.camel.mail.enums.Templates;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
@@ -10,10 +11,10 @@ import java.io.Serializable;
 @Data
 public class MailTemplate implements Serializable {
     @NotNull(message = "Templates name can't be null")
-    private String name;
+    private Templates type;
     @NotNull(message = "Templates path can't be null")
     private String path;
-    @NotNull(message = "Templates contenType can't be null")
+    @NotNull(message = "Templates contentType can't be null")
     private String contentType;
     private boolean attachment;
 }
