@@ -3,13 +3,13 @@ package cz.vojtechkrakora.camel.mail.processor;
 import cz.vojtechkrakora.camel.mail.conf.MailProperties;
 import cz.vojtechkrakora.camel.mail.pojo.MailTemplate;
 import cz.vojtechkrakora.camel.mail.service.AttachmentService;
-import cz.vojtechkrakora.camel.util.TemplateProviderUtil;
 import lombok.AllArgsConstructor;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Component
@@ -27,7 +27,8 @@ public class SimpleMailProcessor implements Processor {
         ctx.setHeader("Content-Type", template.getContentType());
         ctx.setHeader("From", "no-reply@some.org");
         ctx.setHeader("To", "test@some.org");
-        ctx.setBody(TemplateProviderUtil.getTemplateContent(template.getPath()));
+        ctx.setHeader("now", LocalDateTime.now());
+        ctx.setBody(template.getType().getName());
         attachmentService.addAttachment(exchange, template.getType());
     }
 

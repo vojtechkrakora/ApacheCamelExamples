@@ -16,6 +16,7 @@ public class CamelMailRoute extends RouteBuilder {
         from("direct:sendMail")
                 .log("Route started.")
                 .process(simpleMailProcessor)
+                .toD("velocity:mail/templates/${body}.vm")
                 .to("smtp://localhost:5025");
     }
 }

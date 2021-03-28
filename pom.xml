@@ -68,7 +68,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-timer-starter</artifactId>
+            <artifactId>camel-velocity-starter</artifactId>
         </dependency>
     </dependencies>
 
