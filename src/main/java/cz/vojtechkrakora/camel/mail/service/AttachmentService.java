@@ -3,18 +3,21 @@ package cz.vojtechkrakora.camel.mail.service;
 import cz.vojtechkrakora.camel.mail.enums.Templates;
 import org.apache.camel.Exchange;
 import org.apache.camel.attachment.AttachmentMessage;
-import org.springframework.core.io.ClassPathResource;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 import org.springframework.stereotype.Service;
 
 import javax.activation.DataHandler;
 import javax.mail.util.ByteArrayDataSource;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class AttachmentService {
-    public static final String ATTACHMENT_EXAMPLE_PATH = "attachment/ok_small.png";
-    public static final String ATTACHMENT_EXAMPLE_TYPE = "image/png";
-    public static final String SIMPLE_TEMPLATE_ATTACHMENT_NAME = "ok.png";
+    public static final String ATTACHMENT_EXAMPLE_TYPE = "text/csv";
+    public static final String SIMPLE_TEMPLATE_ATTACHMENT_NAME = "ok.csv";
 
     /**
      * Adds an attachment for required Template, if template type does not have an attachments adds nothing.
@@ -35,10 +38,21 @@ public class AttachmentService {
 
     private Exchange addSimpleTemplateAttachment(Exchange ex) throws IOException {
         AttachmentMessage am = ex.getMessage(AttachmentMessage.class);
-        ClassPathResource attachment = new ClassPathResource(ATTACHMENT_EXAMPLE_PATH);
-        ByteArrayDataSource ba = new ByteArrayDataSource(attachment.getInputStream(), ATTACHMENT_EXAMPLE_TYPE);
+        ByteArrayDataSource ba = new ByteArrayDataSource(getDummyCsv(), ATTACHMENT_EXAMPLE_TYPE);
         am.addAttachment(SIMPLE_TEMPLATE_ATTACHMENT_NAME, new DataHandler(ba));
 
         return ex;
+    }
+
+    private ByteArrayInputStream getDummyCsv() throws IOException {
+
+        StringWriter writer = new StringWriter();
+        CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.EXCEL.withSystemRecordSeparator());
+        csvPrinter.printRecord("text", "csv", "file", 1, "ok");
+        csvPrinter.printRecord("text2", "csv2", "file2", 2, "ok2");
+        csvPrinter.printRecord("text3", "csv3", "file3", 3, "ok3");
+        csvPrinter.flush();
+
+        return new ByteArrayInputStream(writer.toString().getBytes(StandardCharsets.UTF_8));
     }
 }
